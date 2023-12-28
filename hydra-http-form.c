@@ -390,7 +390,7 @@ char *stringify_headers(ptr_header_node *ptr_head) {
 }
 
 int32_t parse_options(char *miscptr, ptr_header_node *ptr_head) {
-  char *ptr, *ptr2;
+  char *ptr, *ptr2, *tmp;
 
   if (miscptr == NULL)
     return 1;
@@ -440,7 +440,7 @@ int32_t parse_options(char *miscptr, ptr_header_node *ptr_head) {
       break;
     case '1':
       code_401_is_failure = 1;
-      char *tmp = strchr(miscptr, ':');
+      tmp = strchr(miscptr, ':');
       if (tmp)
         miscptr = tmp + 1;
       else
@@ -448,7 +448,7 @@ int32_t parse_options(char *miscptr, ptr_header_node *ptr_head) {
       break;
     case '2':
       code_302_is_success = 1;
-      char *tmp = strchr(miscptr, ':');
+      tmp = strchr(miscptr, ':');
       if (tmp)
         miscptr = tmp + 1;
       else
@@ -1476,7 +1476,8 @@ void usage_http_form(const char *service) {
          " the sent/received data!\n"
          " Note that using invalid login condition checks can result in false positives!\n"
          "\nThe following parameters are optional and are put between the form parameters\n"
-         "  and the condition string; seperate them too with colons:\n"
+         "and the condition string; seperate them too with colons:\n"
+         " 1=                  401 error response is interpreted as user/pass wrong\n"
          " 2=                  302 page forward return codes identify a successful attempt\n"
          " (c|C)=/page/uri     to define a different page to gather initial "
          "cookies from\n"
